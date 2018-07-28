@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %}
+<section class="container my-3 py-4 bg-white border">
+    <h2 class="text-center">
+        Add Book
+    </h2>
+</section>
+<section>
+    <div class="container">
+        <form action="{%url 'create'%}" method="post">
+        {% csrf_token %}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+            <div class="row">
+                <div class="col">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter the title">
+                </div>
+                <div class="col">
+                    <label>ISBN</label>
+                    <input type="number" name="isbn" class="form-control" placeholder="ISBN Number">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>No of Pages</label>
+                    <input type="number" name="pagenos" class="form-control" placeholder="">
+                </div>
+                <div class="col">
+                    <label>Published BY</label>
+                    <input type="text" name="publisher" class="form-control" placeholder="">
+                </div>
+                 <div class="col">
+                    <label>Published Date</label>
+                    <input type="date" name="pub_date" class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Genre</label>
+                    <input type="text" name="genre" class="form-control" placeholder="">
+                </div>
+                 <div class="col">
+                    <label>Author</label>
+                    <input type="text" name="authors" class="form-control" placeholder="">
+                </div>
+                 <div class="col">
+                    <label>Cover Image</label>
+                    <input type="text" name="cover" class="form-control" placeholder="">
+                </div>
+                
+          
+            </div>
+                   
+                 <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+            
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

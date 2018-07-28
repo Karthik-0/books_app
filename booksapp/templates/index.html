@@ -1,6 +1,100 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% for book in books %} {% endfor %}
+<section class="container my-3 py-4 bg-white border">
+    <h2 class="text-center">
+        Books
+    </h2>
+</section>
+<script>
+    function filter(e) {
+        if (e == 'all') {
+            e = ""
+        }
+        window.location = "{% url 'index' %}?publisher=" + e;
+    }
+        function filterAuthor(e) {
+        if (e == 'all') {
+            e = ""
+        }
+        window.location = "{% url 'index' %}?authors=" + e;
+    }
+       function filterGenre(e) {
+        if (e == 'all') {
+            e = ""
+        }
+        window.location = "{% url 'index' %}?genre__name=" + e;
+    }
+</script>
+<section>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-3">
+               <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                    <select class="form-control" onchange="filterGenre(this.value)" id="exampleFormControlSelect1">
+                        <option value="all">Genre</option>
+                        <option value="all">All</option>
+                        
+                        {% for book in books %}
+                        {% for genre in book.genre.names%}
+                        
+                      
+                        <option>{{genre}}</option>
+                        {% endfor %}
+                        {% comment %} <option>{{genre}}</option> {% endcomment %}
+                        {% endfor %}
+                      
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+               <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                    <select class="form-control" onchange="filterAuthor(this.value)" id="exampleFormControlSelect1">
+                        <option value="all">Authors</option>
+                        <option value="all">All</option>
+                         {% for book in books %}
+                            <option>{{book.authors}}</option>
+                         {% endfor %}
 
-{% block content %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1"></label>
+                    <select class="form-control" onchange="filter(this.value)" id="exampleFormControlSelect1">
+                        <option value="all">Published by</option>
+                        <option value="all">All</option>
+                         {% for book in books %}
+                            <option>{{book.publisher}}</option>
+                         {% endfor %}
 
-<img src="" alt="">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="row my-4">
+            {% for book in filteredbooks.qs %}
+            <div class="col-md-3 text-center my-2">
+                <a href="{%url 'detail' pk=book.id %}">
+                    <div class="card shadow p-3">
+                        <img class="card-img-top" src="{{book.cover}}" alt="Card image cap" class="img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title prim text-center">{{book.title}}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
 {% endblock content %}

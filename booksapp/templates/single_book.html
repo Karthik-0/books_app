@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="my-4">
+        <div class="container bg-white">
+            <div class="row p-3">
+                <div class="col-md-6 my-4 text-center">
+                    <img src="{{book.cover}}" class="img-fluid shadow" alt="">
+                </div>
+                <div class="col-md-6 p-4 bg-light">
+                    <p><b>Title : </b>{{book.title}}</p>
+                    <p><b>ISBN : </b>{{book.isbn}}</p>
+                    <p><b>Pages : </b>{{book.pagenos}}</p>
+                    <p><b>Published By : </b>{{book.publisher}}</p>
+                    <p><b>Published Date : </b>{{book.pub_date}}</p>
+                    <p><b>Author : </b>{{book.authors}}</p>
+                    
+                    <p><b>Genre : </b>{% for genre in book.genre.names %}<span class="badge mx-1 badge-secondary"> {{genre}} </span>{% endfor %}</p>
+                    <p><b>Description : </b>{{book.desc}}</p>
+                    <form action="{% url 'delete' pk=book.id%}" method="post">
+                    {% csrf_token %}
+                        <a href="{% url 'update' pk=book.id%}" class="btn btn-info">Edit Book</a>
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
