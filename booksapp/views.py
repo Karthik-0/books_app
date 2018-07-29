@@ -13,10 +13,14 @@ class BookList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         books = Book.objects.all()
+        tags = books.values_list('genre__name',flat=True).distinct()
+        # tag = ", ".join(o.name for o in obj.tags.all()
+        # print(tags)
         data = super().get_context_data(**kwargs)
         filter = BookFilter(self.request.GET, queryset=books)
         # print(filter.qs)
         data['filteredbooks'] = filter
+        data['tags'] = tags
         # print(data['filteredbooks'])
         return data
 

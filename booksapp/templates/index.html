@@ -26,6 +26,9 @@
 </script>
 <section>
     <div class="container">
+    {% comment %} {% for tag in tags %}
+    {{tag}}
+    {% endfor %} {% endcomment %}
         <div class="row justify-content-end">
             <div class="col-3">
                <div class="form-group">
@@ -34,14 +37,10 @@
                         <option value="all">Genre</option>
                         <option value="all">All</option>
                         
-                        {% for book in books %}
-                        {% for genre in book.genre.names%}
-                        
-                      
-                        <option>{{genre}}</option>
+                        {% for genre in tags %}
+                            <option>{{genre}}</option>
                         {% endfor %}
-                        {% comment %} <option>{{genre}}</option> {% endcomment %}
-                        {% endfor %}
+                     
                       
                     </select>
                 </div>
