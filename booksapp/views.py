@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Book
+from .models import Book, Author, Publisher
 from .filters import BookFilter
 from django.urls import reverse_lazy
 
@@ -13,7 +13,8 @@ class BookList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         books = Book.objects.all()
-        tags = books.values_list('genre__name',flat=True).distinct()
+        authors = Author.objects.all()
+        tags = books.values_list('genre__name', flat=True).distinct()
         # tag = ", ".join(o.name for o in obj.tags.all()
         # print(tags)
         data = super().get_context_data(**kwargs)
@@ -21,7 +22,9 @@ class BookList(generic.ListView):
         # print(filter.qs)
         data['filteredbooks'] = filter
         data['tags'] = tags
-        # print(data['filteredbooks'])
+        data['authors'] = authors
+        data['publishers'] = Publisher.objects.distinct()
+        print(data['publishers'])
         return data
 
 

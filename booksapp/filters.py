@@ -1,5 +1,6 @@
 import django_filters
-from .models import Book,Author,Publisher
+from .models import Book, Author, Publisher
+
 
 def publishers(request):
     print(request)
@@ -14,7 +15,10 @@ class BookFilter(django_filters.FilterSet):
         to_field_name='name',
         queryset=Author.objects.all(),
     )
-    publisher = django_filters.filters.ModelChoiceFilter(queryset=publishers)
+    publisher = django_filters.filters.ModelChoiceFilter(
+        queryset=Publisher.objects.all(),
+        to_field_name='name'
+    )
 
     class Meta:
         model = Book

@@ -51,12 +51,12 @@
                     <select class="form-control" onchange="filterAuthor(this.value)" id="exampleFormControlSelect1">
                         <option value="all">Authors</option>
                         <option value="all">All</option>
-                        {% for author in books.authors.all %} <option>{{author.name}}</option> {% endfor %}
-                         {% for book in books.authors.all %}
-                            <option>{{book.name}}</option>
+                         {% for author in authors %}
+                            <option>{{author.name}}</option>
                          {% endfor %}
 
                     </select>
+                    {{books.authors.all}}
                 </div>
             </div>
             <div class="col-3">
@@ -65,8 +65,8 @@
                     <select class="form-control" onchange="filter(this.value)" id="exampleFormControlSelect1">
                         <option value="all">Published by</option>
                         <option value="all">All</option>
-                         {% for book in books %}
-                            <option>{{book.publisher}}</option>
+                         {% for publisher in publishers %}
+                            <option>{{publisher}}</option>
                          {% endfor %}
 
                     </select>
