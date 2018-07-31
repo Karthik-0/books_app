@@ -2,6 +2,16 @@ from django.db import models
 from taggit.managers import TaggableManager
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+
 class Book(models.Model):
     title = models.CharField(max_length=50)
     isbn = models.IntegerField()
@@ -9,9 +19,9 @@ class Book(models.Model):
     cover = models.CharField(max_length=300)
     desc = models.TextField()
     genre = TaggableManager(related_name="tags")
-    publisher = models.CharField(max_length=30)
+    publisher =models.ForeignKey("Publisher", on_delete=models.CASCADE)
     pub_date = models.DateField()
-    authors = models.CharField(max_length=30)
+    authors = models.ManyToManyField("Author")
 
     def __str__(self):
         return self.title
