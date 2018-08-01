@@ -18,11 +18,11 @@ class Publisher(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=50)
-    isbn = models.IntegerField()
-    pagenos = models.IntegerField()
-    cover = models.CharField(max_length=300)
+    isbn = models.IntegerField(verbose_name="ISBN")
+    totalpages = models.IntegerField()
+    cover = models.FileField(upload_to='images/', max_length=200)
     desc = models.TextField()
-    genre = TaggableManager(related_name="tags")
+    genre = TaggableManager(related_name="books")
     publisher = models.ForeignKey("Publisher", on_delete=models.CASCADE)
     pub_date = models.DateField()
     authors = models.ManyToManyField("Author")
