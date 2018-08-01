@@ -8,60 +8,24 @@
     <div class="container">
         <form action="{%url 'update' pk=book.id%}" method="post">
         {% csrf_token %}
-          {{form.as_p}}
-        {% comment %} {{ form.as_p }} {% endcomment %}
-            {% comment %} <div class="row">
-                <div class="col">
-                    <label>Title</label>
-                    <input type="text" name="title" value="{{book.title}}" class="form-control" placeholder="Enter the title">
-                </div>
-                <div class="col">
-                    <label>ISBN</label>
-                    <input type="number" name="isbn" value="{{book.isbn}}" class="form-control" placeholder="ISBN Number">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label>No of Pages</label>
-                    <input type="number" name="pagenos" value="{{book.pagenos}}" class="form-control" placeholder="">
-                </div>
-                <div class="col">
-                    <label>Published BY</label>
-                    <input type="text" name="publisher" value="{{book.publisher}}" class="form-control" placeholder="">
-                </div>
-                 <div class="col">
-                    <label>Published Date</label>
-                    <input type="date" name="pub_date" value="{{book.pub_date}}" class="form-control" placeholder="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label>Genre</label>
-                    <input type="text" name="genre" value="{% for tags in book.genre.names %}{{tags}}, {% endfor %}" class="form-control" placeholder="">
-                </div>
-                 <div class="col">
-                    <label>Author</label>
-                    <input type="text" name="authors" value="{{book.authors}}" class="form-control" placeholder="">
-                </div>
-                 <div class="col">
-                    <label>Cover Image</label>
-                    <input type="text" name="cover" value="{{book.cover}}" class="form-control" placeholder="">
-                </div>
-                
-          
-            </div>
-                   
-                 <div class="form-group">
-    <label for="exampleFormControlTextarea1">Description</label>
-    <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3">
-    {{book.desc}}
-    </textarea>
-  </div> {% endcomment %}
-            
+                {% for field in form %}
+    <div class="form-group">
+        {{ field.label }}
+         {{ field }}
+         {{field.errors}}
+    </div>
+    {% endfor %}
             <br/>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+<script>
+$('[data-toggle="datepicker"]').datepicker();
+</script>
 {% endblock content %}

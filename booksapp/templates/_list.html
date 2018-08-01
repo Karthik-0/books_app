@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container my-3 py-4 bg-white border">
+    <h2 class="text-center">
+        {{template}}
+    </h2>
+</section>
+<section>
+    <div class="container bg-white shadow my-4 py-4">
+      <div class="row">
+        <div class="col-md-6">
+        <table>
+            {% for field in fields %}
+            
+              <tr>
+                  <td><a href="{% url 'index' %}?{{search_url}}={{field}}">{{field.name}}</a> </td>
+              <td>  <a href="{% url edit_url field.id %}" class="mx-5 text-secondary">Edit</a></td>
+                <td><a href="{% url delete_url field.id %}" class="mx-5 text-danger">Delete</a></td>
+              </tr>
+            
+            {% endfor %}
+        </table>
+      
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock content %}

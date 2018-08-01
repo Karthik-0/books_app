@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container my-3 py-4 bg-white border">
+    <h2 class="text-center">
+        {{template}}
+    </h2>
+</section>
+
+<section>
+    <div class="container shadow bg-white py-5">
+        <form action="{% url form_url field.id %}" method="post">
+        {% csrf_token %}
+            <input type="text" name="name" class="form-control" value="{{field.name}}"> <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

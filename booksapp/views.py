@@ -3,6 +3,7 @@ from .models import Book, Author, Publisher
 from .filters import BookFilter
 from .forms import BookForm
 from django.urls import reverse_lazy
+from taggit.models import Tag
 
 
 class BookList(generic.ListView):
@@ -50,3 +51,44 @@ class BookUpdate(generic.UpdateView):
     template_name = 'update_book.html'
     context_object_name = 'book'
     success_url = reverse_lazy('index')
+
+
+class GenreList(generic.ListView):
+    model = Tag
+    template_name = 'genre_list.html'
+    context_object_name = 'genres'
+
+
+class GenreEdit(generic.UpdateView):
+    model = Tag
+    template_name = 'edit_genre.html'
+    fields = ['name']
+    context_object_name = 'genre'
+    success_url = reverse_lazy('genre')
+
+
+class GenreDelete(generic.DeleteView):
+    model = Tag
+    success_url = reverse_lazy('genre')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+
+class AuthorList(generic.ListView):
+    model = Author
+    template_name = 'author_list.html'
+    context_object_name = 'authors'
+
+
+class AuthorEdit(generic.UpdateView):
+    model = Author
+    template_name = 'edit_author.html'
+    fields = ['name']
+    context_object_name = 'author'
+    success_url = reverse_lazy('author')
+
+
+class AuthorDelete(generic.DeleteView):
+    model = Author
+    success_url = reverse_lazy('author')
