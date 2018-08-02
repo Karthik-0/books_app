@@ -4,7 +4,7 @@
         Books
     </h2>
 </section>
-<script>
+{% comment %} <script>
     function filter(e) {
         if (e == 'all') {
             e = ""
@@ -74,8 +74,17 @@
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
+{% comment %} {{filteredbooks.form.as_tab}} {% endcomment %}
+<section>
+<div class="container">
+<form action="" method="get">
+{{filteredbooks.form}}
+<button type="submit"> Submit</button>
+</form>
+</div>
+</section>
 
 <section>
     <div class="container">

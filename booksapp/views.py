@@ -18,11 +18,12 @@ class BookList(generic.ListView):
         tags = books.values_list('genre__name', flat=True).distinct()
         data = super().get_context_data(**kwargs)
         filter = BookFilter(self.request.GET, queryset=books)
+        # filter.form.class
         data['filteredbooks'] = filter
         data['tags'] = tags
         data['authors'] = authors
         data['publishers'] = Publisher.objects.distinct()
-        print(data['publishers'])
+        # print(data['publishers'])
         return data
 
 
