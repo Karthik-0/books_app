@@ -4,6 +4,7 @@
         Books
     </h2>
 </section>
+{% load custom_filters %}
 {% comment %} <script>
     function filter(e) {
         if (e == 'all') {
@@ -26,9 +27,7 @@
 </script>
 <section>
     <div class="container">
-    {% comment %} {% for tag in tags %}
-    {{tag}}
-    {% endfor %} {% endcomment %}
+
         <div class="row justify-content-end">
             <div class="col-3">
                <div class="form-group">
@@ -80,7 +79,11 @@
 <section>
 <div class="container">
 <form action="" method="get">
-{{filteredbooks.form}}
+{% comment %} {{filteredbooks.form}} {% endcomment %}
+{% for field in filteredbooks.form %}
+  <span> {{field.name |capfirst}}
+    {{field |addcss:"form-control"}}</span>
+{% endfor %}
 <button type="submit"> Submit</button>
 </form>
 </div>
@@ -93,7 +96,7 @@
             <div class="col-md-3 text-center my-2">
                 <a href="{%url 'detail' pk=book.id %}">
                     <div class="card shadow p-3">
-                        <img class="card-img-top" src="{{book.cover}}" alt="Card image cap" class="img-fluid">
+                        <img class="card-img-top" src="{{book.cover.url}}" alt="Card image cap" class="img-fluid">
                         <div class="card-body">
                             <h5 class="card-title prim text-center">{{book.title}}</h5>
                         </div>

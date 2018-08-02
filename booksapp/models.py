@@ -20,7 +20,7 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     isbn = models.IntegerField(verbose_name="ISBN")
     totalpages = models.IntegerField()
-    cover = models.FileField(upload_to='images/', max_length=200)
+    cover = models.FileField(upload_to='image/', max_length=200)
     desc = models.TextField()
     genre = TaggableManager(related_name="books")
     publisher = models.ForeignKey("Publisher", on_delete=models.CASCADE)
